@@ -308,6 +308,7 @@ def seed_program():
 	if frappe.db.exists("Care Card Program", PROGRAM):
 		return
 	doc = frappe.new_doc("Care Card Program")
+	doc.name = PROGRAM
 	doc.program_name = PROGRAM
 	doc.currency = "OMR" if frappe.db.exists("Currency", "OMR") else frappe.db.get_value(
 		"Currency", {"enabled": 1}, "name") or "OMR"
@@ -329,6 +330,7 @@ def seed_program():
 		"medical advice. The hospital and its pharmacies may amend the covered services "
 		"and discount percentages with prior notice.</p>")
 	doc.insert(ignore_permissions=True)
+	frappe.db.commit()
 
 
 def seed_categories():
