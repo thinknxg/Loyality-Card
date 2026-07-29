@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include care_card *.css
+recursive-include care_card *.csv
+recursive-include care_card *.html
+recursive-include care_card *.ico
+recursive-include care_card *.js
+recursive-include care_card *.json
+recursive-include care_card *.md
+recursive-include care_card *.png
+recursive-include care_card *.py
+recursive-include care_card *.svg
+recursive-include care_card *.txt
+recursive-exclude care_card *.pyc

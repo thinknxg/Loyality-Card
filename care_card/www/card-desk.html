@@ -1,0 +1,239 @@
+{% extends "templates/web.html" %}
+{% block title %}{{ _("Card Desk") }}{% endblock %}
+
+{% block page_content %}
+<div class="cc-page"><div class="cc-wrap">
+	<p class="cc-eyebrow">{{ _("Counter & pharmacy") }}</p>
+	<h1 class="cc-h1">{{ _("Card desk") }}</h1>
+	<p class="cc-lede">{{ _("Find a card, check what it is worth on this bill, and record the
+		discount. Scanning the barcode into the search box works too.") }}</p>
+
+	<div class="cc-panel" style="margin-top:22px">
+		<label class="cc-field"><span>{{ _("Card number, mobile, civil ID or name") }}</span>
+			<input id="cc-q" type="search" autofocus
+				placeholder="{{ _('Scan or type, then press Enter') }}"></label>
+		<div id="cc-results"></div>
+	</div>
+
+	<div id="cc-detail"></div>
+
+	<h2 class="cc-h2">{{ _("Sell a new card") }}</h2>
+	<div class="cc-panel">
+		<div id="cc-sell-msg"></div>
+		<div class="cc-grid cc-grid-3">
+			<label class="cc-field"><span>{{ _("Member name") }}</span>
+				<input id="cc-s-name" type="text"></label>
+			<label class="cc-field"><span>{{ _("WhatsApp number") }}</span>
+				<input id="cc-s-mobile" type="tel"></label>
+			<label class="cc-field"><span>{{ _("Civil ID") }}</span>
+				<input id="cc-s-civil" type="text"></label>
+			<label class="cc-field"><span>{{ _("Tier") }}</span>
+				<select id="cc-s-tier">
+					{% for tier in tiers %}
+					<option value="{{ tier.name }}">{{ tier.name }} — {{ tier.annual_fee }}
+						{{ currency }}</option>
+					{% endfor %}
+				</select></label>
+			<label class="cc-field"><span>{{ _("Payment method") }}</span>
+				<select id="cc-s-method">
+					<option>Cash</option><option>Credit/Debit Card</option>
+					<option>Mobile Payment</option><option>Bank Transfer</option>
+				</select></label>
+			<label class="cc-field"><span>{{ _("Payment reference") }}</span>
+				<input id="cc-s-ref" type="text"></label>
+		</div>
+		<button class="cc-btn" id="cc-sell" onclick="ccSell()">
+			{{ _("Activate and send the card") }}</button>
+		<p class="cc-note" style="margin-top:10px">
+			{{ _("Collect the fee first. Activation is immediate and the card is delivered to
+			the member's WhatsApp number.") }}</p>
+	</div>
+</div></div>
+
+<script>
+if (typeof flt === "undefined") { window.flt = (v) => parseFloat(v) || 0; }
+const CC_CURRENCY = "{{ currency }}";
+let ccCard = null;
+
+function ccMoney(v) { return `${CC_CURRENCY} ${flt(v).toFixed(3)}`; }
+
+document.getElementById("cc-q").addEventListener("keydown", function (event) {
+	if (event.key !== "Enter") return;
+	ccSearch(this.value);
+});
+
+function ccSearch(query) {
+	frappe.call({
+		method: "care_card.api.desk.search",
+		args: {query: query},
+		callback(r) {
+			const rows = r.message || [];
+			const box = document.getElementById("cc-results");
+			if (!rows.length) {
+				box.innerHTML = `<p class="cc-note">${__("No card matches that. Check the number, or sell a new card below.")}</p>`;
+				return;
+			}
+			if (rows.length === 1) { ccOpen(rows[0].name); box.innerHTML = ""; return; }
+			box.innerHTML = `<table class="cc-table"><tbody>${rows.map((row) => `
+				<tr style="cursor:pointer" onclick="ccOpen('${row.name}')">
+					<td>${frappe.utils.escape_html(row.member_name)}</td>
+					<td class="cc-num">${frappe.utils.escape_html(row.card_number || "")}</td>
+					<td>${frappe.utils.escape_html(row.tier || "")}</td>
+					<td>${frappe.utils.escape_html(row.status || "")}</td>
+				</tr>`).join("")}</tbody></table>`;
+		},
+	});
+}
+
+function ccOpen(name) {
+	frappe.call({
+		method: "care_card.api.desk.card_detail",
+		args: {card: name},
+		callback(r) { ccCard = r.message; ccRenderDetail(); },
+	});
+}
+
+function ccRenderDetail() {
+	const d = ccCard;
+	if (!d) return;
+	const pill = d.eligible
+		? `<span class="cc-pill is-active">${__("Can be used today")}</span>`
+		: `<span class="cc-pill is-bad">${frappe.utils.escape_html(d.reason || __("Not usable"))}</span>`;
+
+	document.getElementById("cc-detail").innerHTML = `
+		<h2 class="cc-h2">${frappe.utils.escape_html(d.member_name)} ${pill}</h2>
+		<div class="cc-panel">
+			<p><span class="cc-num">${frappe.utils.escape_html(d.card_number)}</span> ·
+				${frappe.utils.escape_html(d.tier)} ·
+				${__("Valid until")} ${frappe.datetime.str_to_user(d.expiry_date)} ·
+				${__("Saved so far")} <b>${ccMoney(d.utilization.benefit)}</b></p>
+
+			<label class="cc-field" style="max-width:420px"><span>${__("Who is being treated")}</span>
+				<select id="cc-benef">${(d.beneficiaries || []).map((p) =>
+					`<option value="${p.code}">${frappe.utils.escape_html(p.name)} — ${p.relationship}</option>`
+				).join("")}</select></label>
+
+			<h3 style="font-size:15px;margin:16px 0 8px">${__("Bill lines")}</h3>
+			<div id="cc-lines"></div>
+			<button class="cc-btn is-ghost" type="button" onclick="ccAddLine()">${__("Add a line")}</button>
+
+			<div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+				<button class="cc-btn is-ghost" onclick="ccPrice()">${__("Check the discount")}</button>
+				<button class="cc-btn" onclick="ccRecord()">${__("Record this usage")}</button>
+				<button class="cc-btn is-ghost" onclick="ccResend()">${__("Resend the card")}</button>
+			</div>
+			<div id="cc-quote" style="margin-top:16px"></div>
+		</div>`;
+	ccAddLine();
+}
+
+function ccAddLine() {
+	const row = document.createElement("div");
+	row.className = "cc-grid cc-grid-3 cc-line";
+	row.innerHTML = `
+		<label class="cc-field"><span>${__("Item or service code")}</span>
+			<input type="text" class="l-code"></label>
+		<label class="cc-field"><span>${__("Item group")}</span>
+			<input type="text" class="l-group"></label>
+		<label class="cc-field"><span>${__("Amount")}</span>
+			<input type="number" step="0.001" class="l-amount"></label>`;
+	document.getElementById("cc-lines").appendChild(row);
+}
+
+function ccLines() {
+	return Array.from(document.querySelectorAll(".cc-line")).map((row) => ({
+		item_code: row.querySelector(".l-code").value.trim(),
+		item_name: row.querySelector(".l-code").value.trim(),
+		item_group: row.querySelector(".l-group").value.trim(),
+		qty: 1,
+		rate: flt(row.querySelector(".l-amount").value),
+		amount: flt(row.querySelector(".l-amount").value),
+	})).filter((line) => line.amount > 0);
+}
+
+function ccShowQuote(result) {
+	const rows = (result.lines || []).map((line) => `
+		<tr>
+			<td>${frappe.utils.escape_html(line.item_name || "—")}</td>
+			<td>${frappe.utils.escape_html(line.benefit_category || "—")}</td>
+			<td class="num">${ccMoney(line.gross_amount)}</td>
+			<td class="num">${ccMoney(flt(line.discount_amount) + flt(line.copay_shared))}</td>
+			<td class="cc-note">${frappe.utils.escape_html(line.explanation || "")}</td>
+		</tr>`).join("");
+	document.getElementById("cc-quote").innerHTML = `
+		<table class="cc-table">
+			<thead><tr><th>${__("Line")}</th><th>${__("Category")}</th>
+				<th class="num">${__("Gross")}</th><th class="num">${__("Granted")}</th>
+				<th>${__("Why")}</th></tr></thead>
+			<tbody>${rows}</tbody>
+		</table>
+		<p style="margin-top:10px">${__("Member pays")}
+			<b>${ccMoney(result.totals.net)}</b> · ${__("Saved")}
+			<b>${ccMoney(flt(result.totals.discount) + flt(result.totals.copay_shared))}</b></p>`;
+}
+
+function ccPrice() {
+	frappe.call({
+		method: "care_card.api.desk.price_basket",
+		args: {card: ccCard.name, lines: ccLines(),
+			beneficiary_code: document.getElementById("cc-benef").value},
+		callback(r) { if (r.message) ccShowQuote(r.message); },
+	});
+}
+
+function ccRecord() {
+	frappe.call({
+		method: "care_card.api.desk.record_usage",
+		args: {card: ccCard.name, lines: ccLines(),
+			beneficiary_code: document.getElementById("cc-benef").value},
+		callback(r) {
+			if (!r.message) return;
+			ccShowQuote(r.message);
+			frappe.show_alert({message: __("Usage recorded: {0}", [r.message.usage]),
+				indicator: "green"});
+		},
+	});
+}
+
+function ccResend() {
+	frappe.call({
+		method: "care_card.api.desk.resend_card",
+		args: {card: ccCard.name},
+		callback() {
+			frappe.show_alert({message: __("Card queued for delivery"), indicator: "green"});
+		},
+	});
+}
+
+function ccSell() {
+	const name = document.getElementById("cc-s-name").value.trim();
+	const mobile = document.getElementById("cc-s-mobile").value.trim();
+	const box = document.getElementById("cc-sell-msg");
+	if (!name || !mobile) {
+		box.innerHTML = `<div class="cc-alert is-bad">${__("Enter the member's name and WhatsApp number.")}</div>`;
+		return;
+	}
+	const button = document.getElementById("cc-sell");
+	button.disabled = true;
+	frappe.call({
+		method: "care_card.api.desk.sell_card",
+		args: {
+			member_name: name,
+			mobile_whatsapp: mobile,
+			civil_id: document.getElementById("cc-s-civil").value.trim(),
+			tier: document.getElementById("cc-s-tier").value,
+			payment_method: document.getElementById("cc-s-method").value,
+			payment_reference: document.getElementById("cc-s-ref").value.trim(),
+		},
+		callback(r) {
+			button.disabled = false;
+			if (!r.message) return;
+			box.innerHTML = `<div class="cc-alert is-good">${__("Card")} ${r.message.card_number}
+				${__("is active and on its way to WhatsApp.")}</div>`;
+			ccOpen(r.message.card);
+		},
+		error() { button.disabled = false; },
+	});
+}
+</script>
+{% endblock %}

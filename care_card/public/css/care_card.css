@@ -1,0 +1,14 @@
+/* Desk styling — kept minimal so it inherits the Frappe theme. */
+.cc-desk-indicator { font-weight: 600; }
+.cc-explanation-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cc-explanation-table th {
+	text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--border-color);
+	font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+	color: var(--text-muted);
+}
+.cc-explanation-table td {
+	padding: 8px 10px 8px 0; border-bottom: 1px solid var(--border-color);
+	vertical-align: top;
+}
+.cc-explanation-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.cc-explanation-why { color: var(--text-muted); }

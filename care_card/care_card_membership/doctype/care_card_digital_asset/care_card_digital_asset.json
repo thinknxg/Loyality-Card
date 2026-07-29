@@ -1,0 +1,171 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "card",
+  "beneficiary_code",
+  "asset_type",
+  "cb_asset_1",
+  "generated_on",
+  "valid_upto",
+  "is_current",
+  "sb_asset_payload",
+  "qr_token",
+  "card_url",
+  "card_svg",
+  "card_file",
+  "sb_asset_delivery",
+  "delivery_status",
+  "delivered_on",
+  "cb_asset_2",
+  "message_log",
+  "delivery_error"
+ ],
+ "fields": [
+  {
+   "fieldname": "card",
+   "fieldtype": "Link",
+   "label": "Care Card",
+   "options": "Care Card",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "beneficiary_code",
+   "fieldtype": "Data",
+   "label": "Beneficiary",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "asset_type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Digital Card\nQR Token\nPhysical Card Batch",
+   "default": "Digital Card",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb_asset_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "generated_on",
+   "fieldtype": "Datetime",
+   "label": "Generated On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "valid_upto",
+   "fieldtype": "Date",
+   "label": "Valid Upto",
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_current",
+   "fieldtype": "Check",
+   "label": "Current",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sb_asset_payload",
+   "fieldtype": "Section Break",
+   "label": "Payload"
+  },
+  {
+   "fieldname": "qr_token",
+   "fieldtype": "Small Text",
+   "label": "Signed QR Token",
+   "read_only": 1
+  },
+  {
+   "fieldname": "card_url",
+   "fieldtype": "Data",
+   "label": "Card URL",
+   "read_only": 1
+  },
+  {
+   "fieldname": "card_svg",
+   "fieldtype": "Code",
+   "label": "Card SVG",
+   "options": "HTML",
+   "read_only": 1
+  },
+  {
+   "fieldname": "card_file",
+   "fieldtype": "Attach",
+   "label": "Card File"
+  },
+  {
+   "fieldname": "sb_asset_delivery",
+   "fieldtype": "Section Break",
+   "label": "Delivery"
+  },
+  {
+   "fieldname": "delivery_status",
+   "fieldtype": "Select",
+   "label": "Delivery Status",
+   "options": "Not Sent\nQueued\nSent\nDelivered\nFailed",
+   "default": "Not Sent",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "delivered_on",
+   "fieldtype": "Datetime",
+   "label": "Delivered On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_asset_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "message_log",
+   "fieldtype": "Link",
+   "label": "Message Log",
+   "options": "Care Card Message Log",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_error",
+   "fieldtype": "Small Text",
+   "label": "Delivery Error",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Membership",
+ "name": "Care Card Digital Asset",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "hash",
+ "title_field": "card"
+}

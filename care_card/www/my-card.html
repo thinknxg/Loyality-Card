@@ -1,0 +1,155 @@
+{% extends "templates/web.html" %}
+{% block title %}{{ _("My Care Card") }}{% endblock %}
+
+{% block page_content %}
+<div class="cc-page"><div class="cc-wrap">
+	<div id="cc-root">
+		<p class="cc-note">{{ _("Loading your card…") }}</p>
+	</div>
+</div></div>
+
+<script>
+if (typeof flt === "undefined") { window.flt = (v) => parseFloat(v) || 0; }
+const CC_CURRENCY = "{{ currency }}";
+
+function ccMoney(value) {
+	return `${CC_CURRENCY} ${flt(value).toFixed(3)}`;
+}
+
+function ccStatusPill(status) {
+	const kind = status === "Active" ? "is-active"
+		: (status === "Expired" || status === "Cancelled") ? "is-bad" : "is-warn";
+	return `<span class="cc-pill ${kind}">${frappe.utils.escape_html(status)}</span>`;
+}
+
+// The savings meter is the point of the page: fee paid vs benefit taken,
+// with breakeven marked on the track.
+function ccMeter(fees, benefit) {
+	const scale = Math.max(fees * 2, benefit, 1);
+	const fill = Math.min(benefit / scale * 100, 100);
+	const mark = Math.min(fees / scale * 100, 100);
+	const over = benefit >= fees && fees > 0;
+	return `
+		<div class="cc-meter">
+			<div class="cc-meter-track">
+				<div class="cc-meter-fill ${over ? "is-over" : ""}" style="width:${fill}%"></div>
+				<div class="cc-meter-mark" style="left:${mark}%">
+					<span>${__("Fee paid")}</span></div>
+			</div>
+			<div class="cc-meter-legend">
+				<span>${__("You have saved")} <b>${ccMoney(benefit)}</b></span>
+				<span>${__("Annual fee")} <b>${ccMoney(fees)}</b></span>
+			</div>
+		</div>
+		<p class="cc-note" style="margin-top:10px">${
+			over
+				? __("Your card has paid for itself. Everything from here is money back in your pocket.")
+				: __("Keep presenting your card — you are on the way to covering the annual fee.")
+		}</p>`;
+}
+
+function ccRender(data) {
+	const root = document.getElementById("cc-root");
+	if (!data || !data.found) {
+		root.innerHTML = `<div class="cc-empty">
+			${__("No Care Card is linked to this account yet.")}
+			<div style="margin-top:14px">
+				<a class="cc-btn" href="/care-card">${__("See the tiers")}</a></div>
+		</div>`;
+		return;
+	}
+
+	const card = data.card;
+	const balances = data.balances || {};
+	const usageRows = (data.usage || []).map((row) => `
+		<tr>
+			<td>${frappe.datetime.str_to_user(row.posting_date)}</td>
+			<td>${frappe.utils.escape_html(row.beneficiary_name || card.member_name)}</td>
+			<td>${frappe.utils.escape_html(row.location || "—")}</td>
+			<td class="num">${ccMoney(row.gross_amount)}</td>
+			<td class="num">${ccMoney(flt(row.total_discount) + flt(row.copay_shared))}</td>
+		</tr>`).join("");
+
+	const categoryRows = (data.by_category || []).map((row) => `
+		<tr><td>${frappe.utils.escape_html(row.category || "—")}</td>
+		<td class="num">${ccMoney(row.amount)}</td></tr>`).join("");
+
+	const dependents = (card.dependents || []).filter((d) => d.is_active);
+
+	root.innerHTML = `
+		<p class="cc-eyebrow">${__("Membership")} · ${card.tier}</p>
+		<h1 class="cc-h1">${frappe.utils.escape_html(card.member_name)}</h1>
+		<p class="cc-lede">
+			<span class="cc-num">${frappe.utils.escape_html(card.card_number || "")}</span>
+			&nbsp; ${ccStatusPill(card.status)}
+			&nbsp; ${__("Valid until")} ${frappe.datetime.str_to_user(card.expiry_date)}
+		</p>
+
+		<div class="cc-grid cc-grid-2" style="margin-top:26px">
+			<div class="cc-panel">
+				<div class="cc-cardface">${(data.asset && data.asset.card_svg) || ""}</div>
+				<p class="cc-note" style="margin-top:12px">
+					${__("Show this card at the counter before your bill is prepared.")}</p>
+			</div>
+			<div class="cc-panel">
+				<h2 class="cc-h2" style="margin-top:0">${__("This year")}</h2>
+				${ccMeter(flt(balances.fees), flt(balances.total_benefit))}
+				<table class="cc-table" style="margin-top:18px">
+					<tbody>
+						<tr><td>${__("Discounts on bills")}</td>
+							<td class="num">${ccMoney(balances.discount)}</td></tr>
+						<tr><td>${__("Co-payment we absorbed")}</td>
+							<td class="num">${ccMoney(balances.copay)}</td></tr>
+						<tr><td>${__("Visits")}</td>
+							<td class="num">${(data.usage || []).length}</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<h2 class="cc-h2">${__("Who is covered")}</h2>
+		<div class="cc-panel">
+			<table class="cc-table">
+				<thead><tr><th>${__("Name")}</th><th>${__("Relationship")}</th>
+					<th>${__("Beneficiary code")}</th></tr></thead>
+				<tbody>
+					<tr><td>${frappe.utils.escape_html(card.member_name)}</td>
+						<td>${__("Cardholder")}</td>
+						<td class="cc-num">${frappe.utils.escape_html(card.card_number || "")}</td></tr>
+					${dependents.map((d) => `<tr>
+						<td>${frappe.utils.escape_html(d.name)}</td>
+						<td>${frappe.utils.escape_html(d.relationship || "")}</td>
+						<td class="cc-num">${frappe.utils.escape_html(d.code || "")}</td></tr>`).join("")}
+				</tbody>
+			</table>
+		</div>
+
+		<h2 class="cc-h2">${__("Where your savings came from")}</h2>
+		<div class="cc-panel">
+			${categoryRows
+				? `<table class="cc-table"><tbody>${categoryRows}</tbody></table>`
+				: `<p class="cc-note">${__("Nothing yet. Your savings will appear here after your first visit.")}</p>`}
+		</div>
+
+		<h2 class="cc-h2">${__("Recent visits")}</h2>
+		<div class="cc-panel">
+			${usageRows ? `<table class="cc-table">
+				<thead><tr><th>${__("Date")}</th><th>${__("Who")}</th><th>${__("Where")}</th>
+					<th class="num">${__("Bill")}</th><th class="num">${__("Saved")}</th></tr></thead>
+				<tbody>${usageRows}</tbody></table>`
+				: `<p class="cc-note">${__("No visits recorded yet.")}</p>`}
+		</div>`;
+}
+
+frappe.ready(function () {
+	frappe.call({
+		method: "care_card.api.portal.my_card",
+		callback(r) { ccRender(r.message); },
+		error() {
+			document.getElementById("cc-root").innerHTML =
+				`<div class="cc-empty">${__("We could not load your card. Please refresh.")}</div>`;
+		},
+	});
+});
+</script>
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends "templates/web.html" %}
+{% block title %}{{ _("Care Card") }}{% endblock %}
+
+{% block page_content %}
+<div class="cc-page"><div class="cc-wrap">
+
+	<p class="cc-eyebrow">{{ _("Hospital & pharmacy membership") }}</p>
+	<h1 class="cc-h1">{{ _("One card. A year of lower bills for the whole family.") }}</h1>
+	<p class="cc-lede">
+		{{ _("Pay once a year and every visit costs less — consultations, laboratory and
+		radiology investigations, inpatient care, and everything you buy at our pharmacies.
+		When your insurance leaves you a co-payment, we cover part of that too.") }}
+	</p>
+
+	{% if not tiers %}
+		<div class="cc-empty" style="margin-top:28px">
+			{{ _("No membership tiers are published yet. Please check back shortly.") }}
+		</div>
+	{% else %}
+
+	<h2 class="cc-h2">{{ _("Choose a tier") }}</h2>
+	<div class="cc-grid cc-grid-2">
+		{% for tier in tiers %}
+		<div class="cc-panel cc-tier" style="--tier-colour: {{ tier.card_colour or '#B08A2E' }}">
+			<h3>{{ tier.tier_name }}</h3>
+			<p class="cc-note" style="margin-bottom:12px">{{ tier.tagline or "" }}</p>
+			<p class="cc-fee">{{ tier.annual_fee }} <small>{{ currency }} / {{ _("year") }}</small></p>
+			<p class="cc-note" style="margin:6px 0 14px">
+				{{ _("Covers you and up to {0} family members").format(tier.max_dependents or 0) }}
+			</p>
+			{% for benefit in tier.benefits %}
+				{% if benefit.is_active %}
+				<div class="cc-benefit-row">
+					<span>{{ benefit.benefit_category }}</span>
+					<b>{{ benefit.discount_percent | round | int }}%</b>
+				</div>
+				{% endif %}
+			{% endfor %}
+			<button class="cc-btn" style="margin-top:16px"
+				data-tier="{{ tier.tier_name }}" onclick="ccChoose(this)">
+				{{ _("Register for {0}").format(tier.tier_name) }}
+			</button>
+		</div>
+		{% endfor %}
+	</div>
+
+	<p class="cc-note" style="margin-top:14px">
+		{{ _("Pharmacy discounts vary by product category — over-the-counter items are banded,
+		so vitamins, baby care, first aid and medical devices each carry their own rate.
+		Ask at the counter for the current band list.") }}
+	</p>
+
+	<h2 class="cc-h2" id="register">{{ _("Register") }}</h2>
+	<div class="cc-panel">
+		<div id="cc-msg"></div>
+		<div class="cc-grid cc-grid-2">
+			<div>
+				<label class="cc-field"><span>{{ _("Full name") }}</span>
+					<input id="cc-name" type="text" autocomplete="name"></label>
+				<label class="cc-field"><span>{{ _("WhatsApp number") }}</span>
+					<input id="cc-mobile" type="tel" placeholder="+968 …" autocomplete="tel"></label>
+				<label class="cc-field"><span>{{ _("Email (optional)") }}</span>
+					<input id="cc-email" type="email" autocomplete="email"></label>
+			</div>
+			<div>
+				<label class="cc-field"><span>{{ _("Civil ID") }}</span>
+					<input id="cc-civil" type="text"></label>
+				<label class="cc-field"><span>{{ _("Date of birth") }}</span>
+					<input id="cc-dob" type="date"></label>
+				<label class="cc-field"><span>{{ _("Tier") }}</span>
+					<select id="cc-tier">
+						{% for tier in tiers %}
+						<option value="{{ tier.tier_name }}">{{ tier.tier_name }} —
+							{{ tier.annual_fee }} {{ currency }}</option>
+						{% endfor %}
+					</select></label>
+			</div>
+		</div>
+
+		<h3 style="font-size:15px;margin:10px 0">{{ _("Family members") }}</h3>
+		<div id="cc-deps"></div>
+		<button class="cc-btn is-ghost" type="button" onclick="ccAddDep()">
+			{{ _("Add a family member") }}</button>
+
+		<p style="margin-top:18px">
+			<label><input type="checkbox" id="cc-terms">
+				{{ _("I accept the membership terms") }}</label><br>
+			<label><input type="checkbox" id="cc-consent" checked>
+				{{ _("Send my card and renewal reminders to my WhatsApp number") }}</label>
+		</p>
+
+		<button class="cc-btn" id="cc-submit" onclick="ccSubmit()">
+			{{ _("Send my registration") }}</button>
+		<p class="cc-note" style="margin-top:12px">
+			{{ _("We will contact you to collect the annual fee. Your card is activated the
+			moment payment is received, and arrives on WhatsApp straight away.") }}
+		</p>
+	</div>
+
+	{% if program and program.terms_and_conditions %}
+	<h2 class="cc-h2">{{ _("Terms") }}</h2>
+	<div class="cc-panel cc-note">{{ program.terms_and_conditions }}</div>
+	{% endif %}
+
+	{% endif %}
+</div></div>
+
+<script>
+if (typeof flt === "undefined") { window.flt = (v) => parseFloat(v) || 0; }
+let ccDeps = 0;
+
+function ccChoose(button) {
+	document.getElementById("cc-tier").value = button.dataset.tier;
+	document.getElementById("register").scrollIntoView({behavior: "smooth"});
+	document.getElementById("cc-name").focus();
+}
+
+function ccAddDep() {
+	ccDeps += 1;
+	const row = document.createElement("div");
+	row.className = "cc-grid cc-grid-3";
+	row.innerHTML = `
+		<label class="cc-field"><span>{{ _("Name") }}</span>
+			<input type="text" class="cc-dep-name"></label>
+		<label class="cc-field"><span>{{ _("Relationship") }}</span>
+			<select class="cc-dep-rel">
+				<option>Spouse</option><option>Son</option><option>Daughter</option>
+				<option>Father</option><option>Mother</option><option>Other</option>
+			</select></label>
+		<label class="cc-field"><span>{{ _("Date of birth") }}</span>
+			<input type="date" class="cc-dep-dob"></label>`;
+	document.getElementById("cc-deps").appendChild(row);
+}
+
+function ccMessage(text, kind) {
+	document.getElementById("cc-msg").innerHTML =
+		`<div class="cc-alert is-${kind}">${frappe.utils.escape_html(text)}</div>`;
+}
+
+function ccSubmit() {
+	const name = document.getElementById("cc-name").value.trim();
+	const mobile = document.getElementById("cc-mobile").value.trim();
+	if (!name || !mobile) {
+		ccMessage("{{ _('Enter your name and WhatsApp number so we can reach you.') }}", "bad");
+		return;
+	}
+	if (!document.getElementById("cc-terms").checked) {
+		ccMessage("{{ _('Please accept the membership terms to continue.') }}", "bad");
+		return;
+	}
+	const dependents = [];
+	document.querySelectorAll(".cc-dep-name").forEach(function (input, index) {
+		if (!input.value.trim()) return;
+		dependents.push({
+			dependent_name: input.value.trim(),
+			relationship: document.querySelectorAll(".cc-dep-rel")[index].value,
+			date_of_birth: document.querySelectorAll(".cc-dep-dob")[index].value || null,
+		});
+	});
+
+	const button = document.getElementById("cc-submit");
+	button.disabled = true;
+	frappe.call({
+		method: "care_card.api.portal.submit_application",
+		args: {
+			applicant_name: name,
+			mobile_whatsapp: mobile,
+			email: document.getElementById("cc-email").value.trim(),
+			civil_id: document.getElementById("cc-civil").value.trim(),
+			date_of_birth: document.getElementById("cc-dob").value || null,
+			tier: document.getElementById("cc-tier").value,
+			dependents: dependents,
+			terms_accepted: 1,
+			whatsapp_consent: document.getElementById("cc-consent").checked ? 1 : 0,
+		},
+		callback(r) {
+			button.disabled = false;
+			if (!r.message) return;
+			ccMessage("{{ _('Registration received. Reference') }} " + r.message.application +
+				". {{ _('We will call you to collect the annual fee.') }}", "good");
+		},
+		error() { button.disabled = false; },
+	});
+}
+</script>
+{% endblock %}

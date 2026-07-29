@@ -1,0 +1,185 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "card",
+  "posting_date",
+  "entry_type",
+  "amount",
+  "cb_led_1",
+  "tier",
+  "beneficiary_code",
+  "benefit_category",
+  "margin_cost",
+  "sb_led_ref",
+  "reference_doctype",
+  "reference_name",
+  "term_no",
+  "cb_led_2",
+  "location",
+  "is_cancelled",
+  "cancelled_by_entry",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "card",
+   "fieldtype": "Link",
+   "label": "Care Card",
+   "options": "Care Card",
+   "reqd": 1,
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "entry_type",
+   "fieldtype": "Select",
+   "label": "Entry Type",
+   "options": "Fee Collected\nDiscount Given\nCo-pay Shared\nAdjustment\nRefund\nReversal",
+   "reqd": 1,
+   "in_list_view": 1,
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1,
+   "in_list_view": 1,
+   "read_only": 1,
+   "description": "Signed. Fees are positive, benefits granted are negative."
+  },
+  {
+   "fieldname": "cb_led_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tier",
+   "fieldtype": "Link",
+   "label": "Tier",
+   "options": "Care Card Tier",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "beneficiary_code",
+   "fieldtype": "Data",
+   "label": "Beneficiary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "benefit_category",
+   "fieldtype": "Link",
+   "label": "Benefit Category",
+   "options": "Care Benefit Category",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "margin_cost",
+   "fieldtype": "Currency",
+   "label": "Economic Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_led_ref",
+   "fieldtype": "Section Break",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Data",
+   "label": "Reference DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Data",
+   "label": "Reference Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "term_no",
+   "fieldtype": "Int",
+   "label": "Term",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_led_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "Care Participating Location",
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_cancelled",
+   "fieldtype": "Check",
+   "label": "Cancelled",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cancelled_by_entry",
+   "fieldtype": "Link",
+   "label": "Reversed By",
+   "options": "Care Card Ledger Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Transactions",
+ "name": "Care Card Ledger Entry",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "hash",
+ "title_field": "card",
+ "search_fields": "card,entry_type,reference_name"
+}

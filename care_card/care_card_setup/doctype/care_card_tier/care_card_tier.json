@@ -1,0 +1,185 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tier_name",
+  "program",
+  "annual_fee",
+  "cb_tier_1",
+  "is_active",
+  "sort_order",
+  "fee_item",
+  "sb_tier_family",
+  "max_dependents",
+  "additional_dependent_fee",
+  "cb_tier_2",
+  "include_self",
+  "annual_discount_cap",
+  "sb_tier_benefits",
+  "benefits",
+  "sb_tier_card",
+  "card_colour",
+  "card_accent",
+  "cb_tier_3",
+  "tagline",
+  "tagline_ar"
+ ],
+ "fields": [
+  {
+   "fieldname": "tier_name",
+   "fieldtype": "Data",
+   "label": "Tier Name",
+   "reqd": 1,
+   "in_list_view": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "label": "Program",
+   "options": "Care Card Program",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "annual_fee",
+   "fieldtype": "Currency",
+   "label": "Annual Fee",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb_tier_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Active",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Sort Order",
+   "default": "10"
+  },
+  {
+   "fieldname": "fee_item",
+   "fieldtype": "Data",
+   "label": "Fee Item",
+   "description": "ERPNext Item used to invoice the annual fee. Enable deferred revenue on it."
+  },
+  {
+   "fieldname": "sb_tier_family",
+   "fieldtype": "Section Break",
+   "label": "Family Coverage"
+  },
+  {
+   "fieldname": "max_dependents",
+   "fieldtype": "Int",
+   "label": "Max Dependents",
+   "default": "5"
+  },
+  {
+   "fieldname": "additional_dependent_fee",
+   "fieldtype": "Currency",
+   "label": "Additional Dependent Fee"
+  },
+  {
+   "fieldname": "cb_tier_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "include_self",
+   "fieldtype": "Check",
+   "label": "Cardholder Covered",
+   "default": "1"
+  },
+  {
+   "fieldname": "annual_discount_cap",
+   "fieldtype": "Currency",
+   "label": "Overall Annual Discount Cap",
+   "description": "Total discount + copay share allowed per card year. 0 = uncapped."
+  },
+  {
+   "fieldname": "sb_tier_benefits",
+   "fieldtype": "Section Break",
+   "label": "Benefit Matrix"
+  },
+  {
+   "fieldname": "benefits",
+   "fieldtype": "Table",
+   "label": "Benefits",
+   "options": "Care Card Tier Benefit"
+  },
+  {
+   "fieldname": "sb_tier_card",
+   "fieldtype": "Section Break",
+   "label": "Card Appearance"
+  },
+  {
+   "fieldname": "card_colour",
+   "fieldtype": "Data",
+   "label": "Card Colour",
+   "default": "#C9A227"
+  },
+  {
+   "fieldname": "card_accent",
+   "fieldtype": "Data",
+   "label": "Accent Colour",
+   "default": "#7A6212"
+  },
+  {
+   "fieldname": "cb_tier_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tagline",
+   "fieldtype": "Data",
+   "label": "Tagline"
+  },
+  {
+   "fieldname": "tagline_ar",
+   "fieldtype": "Data",
+   "label": "Tagline (AR)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Setup",
+ "name": "Care Card Tier",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:tier_name",
+ "naming_rule": "By fieldname",
+ "title_field": "tier_name"
+}

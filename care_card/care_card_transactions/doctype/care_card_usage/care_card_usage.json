@@ -1,0 +1,298 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "card",
+  "member_name",
+  "beneficiary_code",
+  "beneficiary_name",
+  "cb_use_1",
+  "tier",
+  "posting_datetime",
+  "posting_date",
+  "location",
+  "sb_use_src",
+  "source_doctype",
+  "source_docname",
+  "external_reference",
+  "cb_use_2",
+  "idempotency_key",
+  "channel",
+  "posted_by",
+  "sb_use_lines",
+  "lines",
+  "sb_use_totals",
+  "gross_amount",
+  "total_discount",
+  "cb_use_3",
+  "copay_shared",
+  "net_amount",
+  "economic_cost",
+  "sb_use_ins",
+  "insurance_involved",
+  "insurance_company",
+  "cb_use_4",
+  "insurance_plan",
+  "claim_reference",
+  "sb_use_notes",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CCU-.YYYY.-",
+   "default": "CCU-.YYYY.-",
+   "hidden": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "card",
+   "fieldtype": "Link",
+   "label": "Care Card",
+   "options": "Care Card",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "Member",
+   "fetch_from": "card.member_name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "beneficiary_code",
+   "fieldtype": "Data",
+   "label": "Beneficiary Code"
+  },
+  {
+   "fieldname": "beneficiary_name",
+   "fieldtype": "Data",
+   "label": "Beneficiary",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb_use_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tier",
+   "fieldtype": "Link",
+   "label": "Tier",
+   "options": "Care Card Tier",
+   "fetch_from": "card.tier",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "posting_datetime",
+   "fieldtype": "Datetime",
+   "label": "Posted On",
+   "reqd": 1,
+   "default": "Now",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "Care Participating Location",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "sb_use_src",
+   "fieldtype": "Section Break",
+   "label": "Source Bill"
+  },
+  {
+   "fieldname": "source_doctype",
+   "fieldtype": "Data",
+   "label": "Source DocType"
+  },
+  {
+   "fieldname": "source_docname",
+   "fieldtype": "Data",
+   "label": "Source Document"
+  },
+  {
+   "fieldname": "external_reference",
+   "fieldtype": "Data",
+   "label": "External Reference"
+  },
+  {
+   "fieldname": "cb_use_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "idempotency_key",
+   "fieldtype": "Data",
+   "label": "Idempotency Key",
+   "unique": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "channel",
+   "fieldtype": "Select",
+   "label": "Channel",
+   "options": "Desk\nPOS\nPortal\nExternal API",
+   "default": "Desk",
+   "read_only": 1
+  },
+  {
+   "fieldname": "posted_by",
+   "fieldtype": "Link",
+   "label": "Posted By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_use_lines",
+   "fieldtype": "Section Break",
+   "label": "Lines"
+  },
+  {
+   "fieldname": "lines",
+   "fieldtype": "Table",
+   "label": "Lines",
+   "options": "Care Card Usage Line"
+  },
+  {
+   "fieldname": "sb_use_totals",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "gross_amount",
+   "fieldtype": "Currency",
+   "label": "Gross Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_discount",
+   "fieldtype": "Currency",
+   "label": "Total Discount",
+   "read_only": 1,
+   "in_list_view": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "cb_use_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "copay_shared",
+   "fieldtype": "Currency",
+   "label": "Co-pay Shared",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "label": "Net Payable",
+   "read_only": 1
+  },
+  {
+   "fieldname": "economic_cost",
+   "fieldtype": "Currency",
+   "label": "Economic Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_use_ins",
+   "fieldtype": "Section Break",
+   "label": "Insurance"
+  },
+  {
+   "fieldname": "insurance_involved",
+   "fieldtype": "Check",
+   "label": "Insurance Involved"
+  },
+  {
+   "fieldname": "insurance_company",
+   "fieldtype": "Data",
+   "label": "Insurance Company"
+  },
+  {
+   "fieldname": "cb_use_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance_plan",
+   "fieldtype": "Data",
+   "label": "Plan"
+  },
+  {
+   "fieldname": "claim_reference",
+   "fieldtype": "Data",
+   "label": "Claim Reference"
+  },
+  {
+   "fieldname": "sb_use_notes",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Care Card Usage",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Transactions",
+ "name": "Care Card Usage",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "title_field": "member_name",
+ "search_fields": "card,beneficiary_name,source_docname"
+}

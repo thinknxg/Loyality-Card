@@ -1,0 +1,506 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "card_number",
+  "member_name",
+  "tier",
+  "cb_card_1",
+  "status",
+  "program",
+  "activation_date",
+  "expiry_date",
+  "sb_card_member",
+  "mobile_whatsapp",
+  "email",
+  "civil_id",
+  "date_of_birth",
+  "cb_card_2",
+  "gender",
+  "nationality",
+  "member_photo",
+  "preferred_language",
+  "sb_card_link",
+  "customer",
+  "patient",
+  "external_patient_id",
+  "cb_card_3",
+  "member_user",
+  "company",
+  "sb_card_addr",
+  "address_line",
+  "city",
+  "cb_card_4",
+  "region",
+  "sb_card_origin",
+  "source_channel",
+  "sold_at_location",
+  "cb_card_5",
+  "issued_by",
+  "application",
+  "auto_renew",
+  "sb_card_dep",
+  "dependents",
+  "sb_card_terms",
+  "terms",
+  "sb_card_stats",
+  "total_fees_paid",
+  "total_discount_availed",
+  "total_copay_shared",
+  "total_benefit",
+  "cb_card_6",
+  "utilization_ratio",
+  "breakeven_date",
+  "visit_count",
+  "last_visit_date",
+  "economic_cost",
+  "sb_card_consent",
+  "whatsapp_consent",
+  "marketing_consent",
+  "cb_card_7",
+  "consent_timestamp",
+  "physical_card_requested",
+  "physical_card_dispatched_on",
+  "sb_card_admin",
+  "suspension_reason",
+  "cancellation_reason",
+  "internal_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CC-.YYYY.-",
+   "default": "CC-.YYYY.-",
+   "hidden": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "card_number",
+   "fieldtype": "Data",
+   "label": "Card Number",
+   "read_only": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "no_copy": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "Member Name",
+   "reqd": 1,
+   "in_list_view": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "tier",
+   "fieldtype": "Link",
+   "label": "Tier",
+   "options": "Care Card Tier",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb_card_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nPending Payment\nActive\nExpired\nSuspended\nCancelled",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "no_copy": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "label": "Program",
+   "options": "Care Card Program",
+   "reqd": 1
+  },
+  {
+   "fieldname": "activation_date",
+   "fieldtype": "Date",
+   "label": "Activation Date",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sb_card_member",
+   "fieldtype": "Section Break",
+   "label": "Member"
+  },
+  {
+   "fieldname": "mobile_whatsapp",
+   "fieldtype": "Data",
+   "label": "WhatsApp Mobile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "civil_id",
+   "fieldtype": "Data",
+   "label": "Civil ID"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "cb_card_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Gender",
+   "options": "\nMale\nFemale"
+  },
+  {
+   "fieldname": "nationality",
+   "fieldtype": "Data",
+   "label": "Nationality"
+  },
+  {
+   "fieldname": "member_photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "fieldname": "preferred_language",
+   "fieldtype": "Select",
+   "label": "Language",
+   "options": "en\nar",
+   "default": "en"
+  },
+  {
+   "fieldname": "sb_card_link",
+   "fieldtype": "Section Break",
+   "label": "System Links"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "label": "Customer"
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Data",
+   "label": "Patient"
+  },
+  {
+   "fieldname": "external_patient_id",
+   "fieldtype": "Data",
+   "label": "HIS Patient ID"
+  },
+  {
+   "fieldname": "cb_card_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "member_user",
+   "fieldtype": "Link",
+   "label": "Portal User",
+   "options": "User",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fieldname": "sb_card_addr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "address_line",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "cb_card_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Data",
+   "label": "Governorate / Region"
+  },
+  {
+   "fieldname": "sb_card_origin",
+   "fieldtype": "Section Break",
+   "label": "Origin"
+  },
+  {
+   "fieldname": "source_channel",
+   "fieldtype": "Select",
+   "label": "Channel",
+   "options": "Online Portal\nHospital Counter\nPharmacy\nCampaign\nCorporate\nMobile App",
+   "default": "Hospital Counter",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "sold_at_location",
+   "fieldtype": "Link",
+   "label": "Sold At",
+   "options": "Care Participating Location"
+  },
+  {
+   "fieldname": "cb_card_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "issued_by",
+   "fieldtype": "Link",
+   "label": "Issued By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "application",
+   "fieldtype": "Link",
+   "label": "Application",
+   "options": "Care Card Application",
+   "read_only": 1
+  },
+  {
+   "fieldname": "auto_renew",
+   "fieldtype": "Check",
+   "label": "Auto Renew Reminder",
+   "default": "1"
+  },
+  {
+   "fieldname": "sb_card_dep",
+   "fieldtype": "Section Break",
+   "label": "Covered Family Members"
+  },
+  {
+   "fieldname": "dependents",
+   "fieldtype": "Table",
+   "label": "Dependents",
+   "options": "Care Card Dependent"
+  },
+  {
+   "fieldname": "sb_card_terms",
+   "fieldtype": "Section Break",
+   "label": "Subscription Terms"
+  },
+  {
+   "fieldname": "terms",
+   "fieldtype": "Table",
+   "label": "Terms",
+   "options": "Care Card Term"
+  },
+  {
+   "fieldname": "sb_card_stats",
+   "fieldtype": "Section Break",
+   "label": "Utilization"
+  },
+  {
+   "fieldname": "total_fees_paid",
+   "fieldtype": "Currency",
+   "label": "Fees Paid",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "total_discount_availed",
+   "fieldtype": "Currency",
+   "label": "Discount Availed",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "total_copay_shared",
+   "fieldtype": "Currency",
+   "label": "Co-pay Shared",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "total_benefit",
+   "fieldtype": "Currency",
+   "label": "Total Benefit",
+   "read_only": 1,
+   "no_copy": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "cb_card_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "utilization_ratio",
+   "fieldtype": "Percent",
+   "label": "Utilization %",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "breakeven_date",
+   "fieldtype": "Date",
+   "label": "Breakeven Date",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "visit_count",
+   "fieldtype": "Int",
+   "label": "Visits",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "last_visit_date",
+   "fieldtype": "Date",
+   "label": "Last Visit",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "economic_cost",
+   "fieldtype": "Currency",
+   "label": "Economic Cost",
+   "read_only": 1,
+   "no_copy": 1,
+   "description": "Discount weighted by each category's margin factor — the real cost to the hospital."
+  },
+  {
+   "fieldname": "sb_card_consent",
+   "fieldtype": "Section Break",
+   "label": "Consent (PDPL)"
+  },
+  {
+   "fieldname": "whatsapp_consent",
+   "fieldtype": "Check",
+   "label": "WhatsApp Consent",
+   "default": "1"
+  },
+  {
+   "fieldname": "marketing_consent",
+   "fieldtype": "Check",
+   "label": "Marketing Consent"
+  },
+  {
+   "fieldname": "cb_card_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "consent_timestamp",
+   "fieldtype": "Datetime",
+   "label": "Consent Recorded",
+   "read_only": 1
+  },
+  {
+   "fieldname": "physical_card_requested",
+   "fieldtype": "Check",
+   "label": "Physical Card Requested"
+  },
+  {
+   "fieldname": "physical_card_dispatched_on",
+   "fieldtype": "Date",
+   "label": "Dispatched On"
+  },
+  {
+   "fieldname": "sb_card_admin",
+   "fieldtype": "Section Break",
+   "label": "Administration"
+  },
+  {
+   "fieldname": "suspension_reason",
+   "fieldtype": "Small Text",
+   "label": "Suspension Reason",
+   "depends_on": "eval:doc.status=='Suspended'"
+  },
+  {
+   "fieldname": "cancellation_reason",
+   "fieldtype": "Small Text",
+   "label": "Cancellation Reason",
+   "depends_on": "eval:doc.status=='Cancelled'"
+  },
+  {
+   "fieldname": "internal_notes",
+   "fieldtype": "Text",
+   "label": "Internal Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "group": "Activity",
+   "link_doctype": "Care Card Usage",
+   "link_fieldname": "card"
+  },
+  {
+   "group": "Activity",
+   "link_doctype": "Care Card Ledger Entry",
+   "link_fieldname": "card"
+  },
+  {
+   "group": "Activity",
+   "link_doctype": "Care Card Message Log",
+   "link_fieldname": "card"
+  }
+ ],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Membership",
+ "name": "Care Card",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "title_field": "member_name",
+ "search_fields": "card_number,mobile_whatsapp,civil_id,tier,status"
+}

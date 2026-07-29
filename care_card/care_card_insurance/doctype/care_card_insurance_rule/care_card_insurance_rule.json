@@ -1,0 +1,192 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "rule_title",
+  "tier",
+  "insurance_company",
+  "cb_ins_1",
+  "insurance_plan",
+  "is_active",
+  "priority",
+  "sb_ins_scope",
+  "applies_to",
+  "benefit_category",
+  "cb_ins_2",
+  "valid_from",
+  "valid_upto",
+  "sb_ins_share",
+  "copay_type",
+  "cardholder_share_percent",
+  "cb_ins_3",
+  "hospital_share_percent",
+  "cap_per_visit",
+  "cap_per_year",
+  "sb_ins_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "rule_title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tier",
+   "fieldtype": "Link",
+   "label": "Tier",
+   "options": "Care Card Tier",
+   "in_list_view": 1,
+   "description": "Blank = every tier."
+  },
+  {
+   "fieldname": "insurance_company",
+   "fieldtype": "Data",
+   "label": "Insurance Company",
+   "in_list_view": 1,
+   "description": "Blank = every insurer."
+  },
+  {
+   "fieldname": "cb_ins_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance_plan",
+   "fieldtype": "Data",
+   "label": "Plan / Policy Class"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Active",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "label": "Priority",
+   "default": "10"
+  },
+  {
+   "fieldname": "sb_ins_scope",
+   "fieldtype": "Section Break",
+   "label": "Applicability"
+  },
+  {
+   "fieldname": "applies_to",
+   "fieldtype": "Select",
+   "label": "Applies To",
+   "options": "Insured Covered Lines\nNon-Covered Lines\nBoth",
+   "default": "Insured Covered Lines"
+  },
+  {
+   "fieldname": "benefit_category",
+   "fieldtype": "Link",
+   "label": "Benefit Category",
+   "options": "Care Benefit Category",
+   "description": "Blank = all categories."
+  },
+  {
+   "fieldname": "cb_ins_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "valid_from",
+   "fieldtype": "Date",
+   "label": "Valid From"
+  },
+  {
+   "fieldname": "valid_upto",
+   "fieldtype": "Date",
+   "label": "Valid Upto"
+  },
+  {
+   "fieldname": "sb_ins_share",
+   "fieldtype": "Section Break",
+   "label": "Co-payment Sharing"
+  },
+  {
+   "fieldname": "copay_type",
+   "fieldtype": "Select",
+   "label": "Co-payment Type",
+   "options": "Percentage\nFixed",
+   "default": "Percentage"
+  },
+  {
+   "fieldname": "cardholder_share_percent",
+   "fieldtype": "Percent",
+   "label": "Cardholder Share of Co-pay %",
+   "default": "50",
+   "description": "Share of the co-payment the cardholder still pays. 50 means a 10% co-pay becomes 5% patient / 5% hospital."
+  },
+  {
+   "fieldname": "cb_ins_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hospital_share_percent",
+   "fieldtype": "Percent",
+   "label": "Hospital Share of Co-pay %",
+   "default": "50",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cap_per_visit",
+   "fieldtype": "Currency",
+   "label": "Cap per Visit"
+  },
+  {
+   "fieldname": "cap_per_year",
+   "fieldtype": "Currency",
+   "label": "Cap per Card Year"
+  },
+  {
+   "fieldname": "sb_ins_notes",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Insurance",
+ "name": "Care Card Insurance Rule",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:rule_title",
+ "naming_rule": "By fieldname",
+ "title_field": "rule_title"
+}

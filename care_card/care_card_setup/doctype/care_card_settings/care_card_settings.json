@@ -1,0 +1,295 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "default_program",
+  "cb_set_0",
+  "default_language",
+  "default_company",
+  "sb_set_pricing",
+  "stacking_policy",
+  "apply_before_tax",
+  "discount_precision",
+  "cb_set_1",
+  "otp_threshold_amount",
+  "allow_manual_override",
+  "block_expired_cards",
+  "sb_set_card",
+  "card_number_prefix",
+  "card_base_url",
+  "cb_set_2",
+  "qr_secret",
+  "qr_rotate_on_renewal",
+  "sb_set_msg",
+  "whatsapp_provider",
+  "whatsapp_api_url",
+  "whatsapp_account_id",
+  "cb_set_3",
+  "whatsapp_sender_id",
+  "whatsapp_token",
+  "custom_webhook_url",
+  "message_retry_limit",
+  "sb_set_api",
+  "enable_external_api",
+  "api_secret",
+  "cb_set_4",
+  "api_timestamp_tolerance",
+  "allowed_ips",
+  "sb_set_privacy",
+  "mask_civil_id",
+  "retention_years",
+  "cb_set_5",
+  "require_consent"
+ ],
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enable Care Card",
+   "default": "1"
+  },
+  {
+   "fieldname": "default_program",
+   "fieldtype": "Link",
+   "label": "Default Program",
+   "options": "Care Card Program"
+  },
+  {
+   "fieldname": "cb_set_0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_language",
+   "fieldtype": "Select",
+   "label": "Default Language",
+   "options": "en\nar",
+   "default": "en"
+  },
+  {
+   "fieldname": "default_company",
+   "fieldtype": "Data",
+   "label": "Default Company"
+  },
+  {
+   "fieldname": "sb_set_pricing",
+   "fieldtype": "Section Break",
+   "label": "Pricing Engine"
+  },
+  {
+   "fieldname": "stacking_policy",
+   "fieldtype": "Select",
+   "label": "Stacking Policy",
+   "options": "Greater Of Two\nCard Only\nNo Card Discount",
+   "default": "Greater Of Two",
+   "description": "Behaviour when a line already carries another discount. Program terms say card discounts cannot be combined with other offers."
+  },
+  {
+   "fieldname": "apply_before_tax",
+   "fieldtype": "Check",
+   "label": "Apply Discount Before Tax",
+   "default": "1"
+  },
+  {
+   "fieldname": "discount_precision",
+   "fieldtype": "Int",
+   "label": "Discount Precision",
+   "default": "3"
+  },
+  {
+   "fieldname": "cb_set_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "otp_threshold_amount",
+   "fieldtype": "Currency",
+   "label": "OTP Verification Threshold",
+   "description": "Bills above this value ask for an OTP sent to the cardholder. 0 = never."
+  },
+  {
+   "fieldname": "allow_manual_override",
+   "fieldtype": "Check",
+   "label": "Allow Manual Discount Override",
+   "default": "0"
+  },
+  {
+   "fieldname": "block_expired_cards",
+   "fieldtype": "Check",
+   "label": "Block Expired Cards",
+   "default": "1"
+  },
+  {
+   "fieldname": "sb_set_card",
+   "fieldtype": "Section Break",
+   "label": "Card Number & QR"
+  },
+  {
+   "fieldname": "card_number_prefix",
+   "fieldtype": "Data",
+   "label": "Card Number Prefix",
+   "default": "97"
+  },
+  {
+   "fieldname": "card_base_url",
+   "fieldtype": "Data",
+   "label": "Card Portal URL",
+   "default": "/my-card"
+  },
+  {
+   "fieldname": "cb_set_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "qr_secret",
+   "fieldtype": "Password",
+   "label": "QR Signing Secret"
+  },
+  {
+   "fieldname": "qr_rotate_on_renewal",
+   "fieldtype": "Check",
+   "label": "Rotate QR on Renewal",
+   "default": "1"
+  },
+  {
+   "fieldname": "sb_set_msg",
+   "fieldtype": "Section Break",
+   "label": "Messaging"
+  },
+  {
+   "fieldname": "whatsapp_provider",
+   "fieldtype": "Select",
+   "label": "WhatsApp Provider",
+   "options": "Disabled\nMeta Cloud API\nTwilio\n360dialog\nCustom Webhook",
+   "default": "Disabled"
+  },
+  {
+   "fieldname": "whatsapp_api_url",
+   "fieldtype": "Data",
+   "label": "API URL"
+  },
+  {
+   "fieldname": "whatsapp_account_id",
+   "fieldtype": "Data",
+   "label": "Phone Number / Account ID"
+  },
+  {
+   "fieldname": "cb_set_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "whatsapp_sender_id",
+   "fieldtype": "Data",
+   "label": "Sender ID"
+  },
+  {
+   "fieldname": "whatsapp_token",
+   "fieldtype": "Password",
+   "label": "API Token / Auth"
+  },
+  {
+   "fieldname": "custom_webhook_url",
+   "fieldtype": "Data",
+   "label": "Custom Webhook URL",
+   "depends_on": "eval:doc.whatsapp_provider=='Custom Webhook'"
+  },
+  {
+   "fieldname": "message_retry_limit",
+   "fieldtype": "Int",
+   "label": "Message Retry Limit",
+   "default": "3"
+  },
+  {
+   "fieldname": "sb_set_api",
+   "fieldtype": "Section Break",
+   "label": "External API (HIS / Pharmacy POS)"
+  },
+  {
+   "fieldname": "enable_external_api",
+   "fieldtype": "Check",
+   "label": "Enable External API",
+   "default": "0"
+  },
+  {
+   "fieldname": "api_secret",
+   "fieldtype": "Password",
+   "label": "HMAC Shared Secret"
+  },
+  {
+   "fieldname": "cb_set_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "api_timestamp_tolerance",
+   "fieldtype": "Int",
+   "label": "Timestamp Tolerance (seconds)",
+   "default": "300"
+  },
+  {
+   "fieldname": "allowed_ips",
+   "fieldtype": "Small Text",
+   "label": "Allowed IPs",
+   "description": "One per line. Blank = any."
+  },
+  {
+   "fieldname": "sb_set_privacy",
+   "fieldtype": "Section Break",
+   "label": "Data Protection (Oman PDPL)"
+  },
+  {
+   "fieldname": "mask_civil_id",
+   "fieldtype": "Check",
+   "label": "Mask Civil ID in Lists",
+   "default": "1"
+  },
+  {
+   "fieldname": "retention_years",
+   "fieldtype": "Int",
+   "label": "Data Retention (Years)",
+   "default": "7"
+  },
+  {
+   "fieldname": "cb_set_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "require_consent",
+   "fieldtype": "Check",
+   "label": "Require Explicit Consent",
+   "default": "1"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Setup",
+ "name": "Care Card Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "issingle": 1
+}

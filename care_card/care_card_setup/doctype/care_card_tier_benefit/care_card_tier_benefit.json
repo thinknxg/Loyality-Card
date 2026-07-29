@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "benefit_category",
+  "discount_type",
+  "discount_percent",
+  "discount_amount",
+  "cb_tb_1",
+  "min_bill_amount",
+  "max_discount_per_transaction",
+  "max_discount_per_year",
+  "applies_to",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "fieldname": "benefit_category",
+   "fieldtype": "Link",
+   "label": "Benefit Category",
+   "options": "Care Benefit Category",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "discount_type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Percentage\nFixed Amount\nRate Override",
+   "default": "Percentage",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "discount_percent",
+   "fieldtype": "Percent",
+   "label": "Discount %",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Fixed Amount"
+  },
+  {
+   "fieldname": "cb_tb_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "min_bill_amount",
+   "fieldtype": "Currency",
+   "label": "Minimum Line Amount"
+  },
+  {
+   "fieldname": "max_discount_per_transaction",
+   "fieldtype": "Currency",
+   "label": "Max Discount / Transaction"
+  },
+  {
+   "fieldname": "max_discount_per_year",
+   "fieldtype": "Currency",
+   "label": "Max Discount / Year"
+  },
+  {
+   "fieldname": "applies_to",
+   "fieldtype": "Select",
+   "label": "Applies To",
+   "options": "Both\nSelf\nDependents",
+   "default": "Both"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Active",
+   "default": "1",
+   "in_list_view": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Setup",
+ "name": "Care Card Tier Benefit",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "istable": 1
+}

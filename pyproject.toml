@@ -1,0 +1,15 @@
+[project]
+name = "care_card"
+version = "1.0.0"
+description = "Hospital & Pharmacy Subscription Card Program for Frappe/ERPNext"
+authors = [{ name = "Kreatao", email = "info@kreatao.com" }]
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["dependencies"]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "care_card"

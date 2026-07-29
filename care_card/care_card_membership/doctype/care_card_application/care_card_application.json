@@ -1,0 +1,313 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "applicant_name",
+  "program",
+  "tier",
+  "cb_app_1",
+  "status",
+  "application_date",
+  "source_channel",
+  "sold_at_location",
+  "sb_app_contact",
+  "mobile_whatsapp",
+  "email",
+  "civil_id",
+  "cb_app_2",
+  "date_of_birth",
+  "gender",
+  "nationality",
+  "sb_app_addr",
+  "address_line",
+  "city",
+  "cb_app_3",
+  "region",
+  "id_document",
+  "sb_app_dep",
+  "dependents",
+  "sb_app_consent",
+  "terms_accepted",
+  "whatsapp_consent",
+  "cb_app_4",
+  "marketing_consent",
+  "consent_timestamp",
+  "sb_app_pay",
+  "fee_amount",
+  "payment_method",
+  "cb_app_5",
+  "payment_reference",
+  "payment_proof",
+  "sb_app_out",
+  "care_card",
+  "rejection_reason"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CCA-.YYYY.-",
+   "default": "CCA-.YYYY.-",
+   "hidden": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "applicant_name",
+   "fieldtype": "Data",
+   "label": "Applicant Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "label": "Program",
+   "options": "Care Card Program",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tier",
+   "fieldtype": "Link",
+   "label": "Tier",
+   "options": "Care Card Tier",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb_app_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nSubmitted\nPaid\nConverted\nRejected\nCancelled",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "application_date",
+   "fieldtype": "Date",
+   "label": "Application Date",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_channel",
+   "fieldtype": "Select",
+   "label": "Channel",
+   "options": "Online Portal\nHospital Counter\nPharmacy\nCampaign\nCorporate\nMobile App",
+   "default": "Online Portal",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "sold_at_location",
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "Care Participating Location"
+  },
+  {
+   "fieldname": "sb_app_contact",
+   "fieldtype": "Section Break",
+   "label": "Contact & Identity"
+  },
+  {
+   "fieldname": "mobile_whatsapp",
+   "fieldtype": "Data",
+   "label": "WhatsApp Mobile",
+   "reqd": 1,
+   "description": "The digital card is delivered to this number."
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "civil_id",
+   "fieldtype": "Data",
+   "label": "Civil ID"
+  },
+  {
+   "fieldname": "cb_app_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Gender",
+   "options": "\nMale\nFemale"
+  },
+  {
+   "fieldname": "nationality",
+   "fieldtype": "Data",
+   "label": "Nationality"
+  },
+  {
+   "fieldname": "sb_app_addr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "address_line",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "cb_app_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Data",
+   "label": "Governorate / Region"
+  },
+  {
+   "fieldname": "id_document",
+   "fieldtype": "Attach",
+   "label": "ID Document"
+  },
+  {
+   "fieldname": "sb_app_dep",
+   "fieldtype": "Section Break",
+   "label": "Family Members"
+  },
+  {
+   "fieldname": "dependents",
+   "fieldtype": "Table",
+   "label": "Dependents",
+   "options": "Care Card Application Dependent"
+  },
+  {
+   "fieldname": "sb_app_consent",
+   "fieldtype": "Section Break",
+   "label": "Consent (PDPL)"
+  },
+  {
+   "fieldname": "terms_accepted",
+   "fieldtype": "Check",
+   "label": "Terms & Conditions Accepted"
+  },
+  {
+   "fieldname": "whatsapp_consent",
+   "fieldtype": "Check",
+   "label": "Consent to WhatsApp Communication"
+  },
+  {
+   "fieldname": "cb_app_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "marketing_consent",
+   "fieldtype": "Check",
+   "label": "Consent to Marketing"
+  },
+  {
+   "fieldname": "consent_timestamp",
+   "fieldtype": "Datetime",
+   "label": "Consent Recorded",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_app_pay",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "fee_amount",
+   "fieldtype": "Currency",
+   "label": "Fee Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Select",
+   "label": "Payment Method",
+   "options": "\nCash\nCredit/Debit Card\nMobile Payment\nBank Transfer\nOnline Gateway"
+  },
+  {
+   "fieldname": "cb_app_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "Payment Reference"
+  },
+  {
+   "fieldname": "payment_proof",
+   "fieldtype": "Attach",
+   "label": "Payment Proof"
+  },
+  {
+   "fieldname": "sb_app_out",
+   "fieldtype": "Section Break",
+   "label": "Outcome"
+  },
+  {
+   "fieldname": "care_card",
+   "fieldtype": "Link",
+   "label": "Care Card",
+   "options": "Care Card",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason",
+   "depends_on": "eval:doc.status=='Rejected'"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Membership",
+ "name": "Care Card Application",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "title_field": "applicant_name",
+ "search_fields": "mobile_whatsapp,civil_id,tier"
+}

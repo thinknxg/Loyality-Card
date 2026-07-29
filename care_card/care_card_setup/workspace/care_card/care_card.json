@@ -1,0 +1,363 @@
+{
+ "charts": [
+  {
+   "chart_name": "Care Card - Usage Trend",
+   "label": "Usage Trend"
+  }
+ ],
+ "content": "[{\"id\": \"ccHead\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Care Card</b></span>\", \"col\": 12}}, {\"id\": \"ccPara\", \"type\": \"paragraph\", \"data\": {\"text\": \"Annual subscription cards for the hospital and its pharmacies. Fees, discounts and co-pay sharing all post to one immutable ledger.\", \"col\": 12}}, {\"id\": \"ccNum1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Care Card - Active Cards\", \"col\": 3}}, {\"id\": \"ccNum2\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Care Card - Fees Collected\", \"col\": 3}}, {\"id\": \"ccNum3\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Care Card - Discount Granted\", \"col\": 3}}, {\"id\": \"ccNum4\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Care Card - Economic Cost\", \"col\": 3}}, {\"id\": \"ccSpacer\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"ccChart1\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Care Card - Usage Trend\", \"col\": 12}}, {\"id\": \"ccShortHead\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\">Shortcuts</span>\", \"col\": 12}}, {\"id\": \"ccSc1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Care Card\", \"col\": 3}}, {\"id\": \"ccSc2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Card Desk\", \"col\": 3}}, {\"id\": \"ccSc3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Care Card Application\", \"col\": 3}}, {\"id\": \"ccSc4\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Care Card Settings\", \"col\": 3}}, {\"id\": \"ccCardsHead\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\">Masters &amp; Reports</span>\", \"col\": 12}}, {\"id\": \"ccCard1\", \"type\": \"card\", \"data\": {\"card_name\": \"Programme Setup\", \"col\": 4}}, {\"id\": \"ccCard2\", \"type\": \"card\", \"data\": {\"card_name\": \"Membership\", \"col\": 4}}, {\"id\": \"ccCard3\", \"type\": \"card\", \"data\": {\"card_name\": \"Transactions\", \"col\": 4}}, {\"id\": \"ccCard4\", \"type\": \"card\", \"data\": {\"card_name\": \"Communication\", \"col\": 4}}, {\"id\": \"ccCard5\", \"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 8}}]",
+ "creation": "2026-07-28 00:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "crm",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Care Card",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Programme Setup",
+   "link_count": 8,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Program",
+   "link_count": 0,
+   "link_to": "Care Card Program",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Tier",
+   "link_count": 0,
+   "link_to": "Care Card Tier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Benefit Category",
+   "link_count": 0,
+   "link_to": "Care Benefit Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Discount Rule",
+   "link_count": 0,
+   "link_to": "Care Card Discount Rule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Exclusion",
+   "link_count": 0,
+   "link_to": "Care Card Exclusion",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Participating Location",
+   "link_count": 0,
+   "link_to": "Care Participating Location",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Insurance Rule",
+   "link_count": 0,
+   "link_to": "Care Card Insurance Rule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Settings",
+   "link_count": 0,
+   "link_to": "Care Card Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Membership",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card",
+   "link_count": 0,
+   "link_to": "Care Card",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Application",
+   "link_count": 0,
+   "link_to": "Care Card Application",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Digital Asset",
+   "link_count": 0,
+   "link_to": "Care Card Digital Asset",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transactions",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Usage",
+   "link_count": 0,
+   "link_to": "Care Card Usage",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Ledger Entry",
+   "link_count": 0,
+   "link_to": "Care Card Ledger Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Adjustment",
+   "link_count": 0,
+   "link_to": "Care Card Adjustment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Communication",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Message Template",
+   "link_count": 0,
+   "link_to": "Care Card Message Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Care Card Message Log",
+   "link_count": 0,
+   "link_to": "Care Card Message Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 8,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Care Card Register",
+   "link_count": 0,
+   "link_to": "Care Card Register",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "dependencies": "Care Card"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Member Utilization and Breakeven",
+   "link_count": 0,
+   "link_to": "Member Utilization and Breakeven",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "dependencies": "Care Card"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Discount by Benefit Category",
+   "link_count": 0,
+   "link_to": "Discount by Benefit Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "dependencies": "Care Card Ledger Entry"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Visit and Dependent Usage Log",
+   "link_count": 0,
+   "link_to": "Visit and Dependent Usage Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "dependencies": "Care Card Usage"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Care Card Program PL",
+   "link_count": 0,
+   "link_to": "Care Card Program PL",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "dependencies": "Care Card Ledger Entry"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Renewal Pipeline",
+   "link_count": 0,
+   "link_to": "Renewal Pipeline",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "dependencies": "Care Card"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Insurance Copay Sharing",
+   "link_count": 0,
+   "link_to": "Insurance Copay Sharing",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "dependencies": "Care Card Usage"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Channel and Agent Performance",
+   "link_count": 0,
+   "link_to": "Channel and Agent Performance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "dependencies": "Care Card"
+  }
+ ],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Care Card Setup",
+ "name": "Care Card",
+ "number_cards": [
+  {
+   "label": "Active Cards",
+   "number_card_name": "Care Card - Active Cards"
+  },
+  {
+   "label": "Fees Collected",
+   "number_card_name": "Care Card - Fees Collected"
+  },
+  {
+   "label": "Discount Granted",
+   "number_card_name": "Care Card - Discount Granted"
+  },
+  {
+   "label": "Economic Cost",
+   "number_card_name": "Care Card - Economic Cost"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 40.0,
+ "shortcuts": [
+  {
+   "label": "Care Card",
+   "link_to": "Care Card",
+   "type": "DocType",
+   "color": "Green",
+   "doc_view": "List"
+  },
+  {
+   "label": "Card Desk",
+   "link_to": "/card-desk",
+   "type": "URL"
+  },
+  {
+   "label": "Care Card Application",
+   "link_to": "Care Card Application",
+   "type": "DocType",
+   "doc_view": "List"
+  },
+  {
+   "label": "Care Card Settings",
+   "link_to": "Care Card Settings",
+   "type": "DocType"
+  }
+ ],
+ "title": "Care Card"
+}
